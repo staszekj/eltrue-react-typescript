@@ -1,0 +1,102 @@
+#main-app {
+  padding: 10px
+}
+
+.main-app {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 50px;
+    margin-bottom: 10px;
+    border: solid 3px bisque;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 1.5em;
+
+    .header-value-1 {
+      color: deeppink;
+    }
+
+    .header-value-2 {
+      color: lightgreen;
+    }
+
+    .header-value-result {
+      color: black;
+    }
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+
+    .left-panel {
+      border-radius: 10px;
+      background-color: bisque;
+      width: 45%;
+      padding: 10px;
+    }
+
+    .values {
+      height: 1.3em;
+      border: solid 1px;
+      border-radius: 10px;
+      overflow: hidden;
+      clear: both;
+    }
+
+    .value-container {
+      float: left;
+      height: 100%;
+      text-align: center;
+    }
+
+    .value1 {
+      width: 50px;
+      background-color: deeppink;
+    }
+
+    .value2 {
+      width: 50px;
+      background-color: lightgreen;
+    }
+
+    .text {
+      line-height: 1.4em;
+    }
+
+    .right-panel {
+      border-radius: 10px;
+      background-color: bisque;
+      width: 45%;
+      padding: 10px;
+    }
+
+    input {
+      font-size: 1em;
+      border: solid 2px;
+      border-radius: 10px;
+      width: 6em;
+      padding: 0 5px;
+    }
+    .input1 {
+      float: left;
+      border-color: deeppink;
+    }
+    .input2 {
+      float: right;
+      border-color: lightgreen;
+    }
+
+    .background-color-green {
+      background-color: green;
+    }
+  }
+}
