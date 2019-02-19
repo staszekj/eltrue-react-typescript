@@ -1,2 +1,4 @@
-Goal of this project is to make researche how to make pure React pure functional development with Typescript.
-
+Goal of this project is to learn 
+* pure React 
+* pure functional programming 
+* with Typescript
