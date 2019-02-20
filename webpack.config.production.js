@@ -1,7 +1,7 @@
 "use strict";
 const webpack = require('webpack');
 const path = require('path');
-const rules = require('./webpack.loaders');
+const rules = require('./webpack.loaders.production');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -10,7 +10,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    devtool: '#source-map',
+    devtool: 'source-map',
     entry: {
         'app': ['./app/app.js']
     },
@@ -36,7 +36,14 @@ module.exports = {
                 parallel: true,
                 sourceMap: true
             }),
-            new OptimizeCSSAssetsPlugin({})
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorOptions: {
+                    map: {
+                        inline: false,
+                        annotation: true,
+                    }
+                }
+            })
         ]
     },
     resolve: {

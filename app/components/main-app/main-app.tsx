@@ -10,17 +10,17 @@ export const MainApp: MainAppType = ({}) => {
             <div className="main">
                 <div className="left-panel">
                     <div className="values">
-                        <div className="value-container value1" style={{width: '60px;'}}><span
+                        <div className="value-container value1" style={{width: '60px'}}><span
                             className="text">60</span>
                         </div>
-                        <div className="value-container value2" style={{width: '40px;'}}><span
+                        <div className="value-container value2" style={{width: '40px'}}><span
                             className="text">40</span>
                         </div>
                     </div>
                 </div>
                 <div className="right-panel background-color-green">
-                    <input className="input1" value="60"/>
-                    <input className="input2" value="40"/>
+                    <input className="input1" value="60" readOnly/>
+                    <input className="input2" value="40" readOnly/>
                 </div>
             </div>
         </div>

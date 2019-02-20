@@ -10,7 +10,7 @@ module.exports = [
         exclude: path.resolve(__dirname, "node_modules"),
         use: [
             {
-                loader: 'style-loader',
+                loader: MiniCssExtractPlugin.loader,
                 options: {
                     sourceMap: true
                 }

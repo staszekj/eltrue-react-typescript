@@ -2,7 +2,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const rules = require('./webpack.loaders');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const WEB_PORT = 8888
@@ -12,6 +11,7 @@ const API_HOST = 'http://localhost:8000'
 
 module.exports = {
     mode: 'development',
+    devtool: "inline-source-map",
     entry: {
         'app': ['./app/app.js']
     },
@@ -54,10 +54,6 @@ module.exports = {
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        }),
         new HtmlWebpackPlugin({
             file: './index.html',
             template: 'app/index.template.html'
