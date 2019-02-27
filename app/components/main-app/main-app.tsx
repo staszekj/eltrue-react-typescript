@@ -1,8 +1,15 @@
 import * as React from 'react'
 import {MainAppType} from 'type/components/main-app/main-app.type';
 import './main-app.scss'
+import {TwoInputs} from '../two-inputs/two-inputs';
 
 export const MainApp: MainAppType = ({}) => {
+
+    const handler = (a: string, b: string) => {
+        console.log('SJA:', a, b)
+        return undefined
+    }
+
     return (
         <div className="main-app">
             <div className="header"><span className="header-value-1">60</span>&nbsp;+&nbsp;<span
@@ -18,10 +25,7 @@ export const MainApp: MainAppType = ({}) => {
                         </div>
                     </div>
                 </div>
-                <div className="right-panel background-color-green">
-                    <input className="input1" value="60" readOnly/>
-                    <input className="input2" value="40" readOnly/>
-                </div>
+                <TwoInputs inputOne={'10'} rightInput={'20'} onChange={handler}/>
             </div>
         </div>
     )
