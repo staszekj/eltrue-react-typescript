@@ -2,17 +2,19 @@ import * as React from 'react'
 import {onChangeFnType, TwoInputsType} from 'type/components/two-inputs/two-inputs.type';
 import {ChangeEvent, useState} from 'react';
 import {
+    ParseFnType,
     TwoValuesContainerStateType,
-    TwoValuesContainerType
+    TwoValuesContainerType, ValidateFnType
 } from 'type/containers/two-values/two-values-container.type';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
+import {parse} from './two-values-parser';
 
-export const TwoValuesContainer: TwoValuesContainerType = ({}) => {
-    const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(
-        {
-            leftInput: '20',
-            rightInput: ''
-        })
+export const validate: ValidateFnType = (value) => {
+    return parse(value) !== null
+}
+
+export const TwoValuesContainer: TwoValuesContainerType = (initState) => {
+    const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
     const onChangeHandler: onChangeFnType = (leftInput, rightInput) => {
         setInputValues({
             leftInput,

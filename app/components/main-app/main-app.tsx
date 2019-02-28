@@ -21,7 +21,7 @@ export const MainApp: MainAppType = ({}) => {
                         </div>
                     </div>
                 </div>
-                <TwoValuesContainer/>
+                <TwoValuesContainer leftInput={"10"} rightInput={"20"}/>
             </div>
         </div>
     )
