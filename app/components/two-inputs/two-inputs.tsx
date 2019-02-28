@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {TwoInputsPropType, TwoInputsType} from 'type/components/two-inputs/two-inputs.type';
+import {TwoInputsType} from 'type/components/two-inputs/two-inputs.type';
 import {ChangeEvent} from 'react';
 
 export const TwoInputs: TwoInputsType = (props) => {

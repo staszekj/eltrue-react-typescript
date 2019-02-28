@@ -1,14 +1,10 @@
 import * as React from 'react'
 import {MainAppType} from 'type/components/main-app/main-app.type';
+import {TwoValuesContainer} from 'app/containers/two-values-container';
+
 import './main-app.scss'
-import {TwoInputs} from '../two-inputs/two-inputs';
 
 export const MainApp: MainAppType = ({}) => {
-
-    const handler = (a: string, b: string) => {
-        console.log('SJA:', a, b)
-        return undefined
-    }
 
     return (
         <div className="main-app">
@@ -25,7 +21,7 @@ export const MainApp: MainAppType = ({}) => {
                         </div>
                     </div>
                 </div>
-                <TwoInputs inputOne={'10'} rightInput={'20'} onChange={handler}/>
+                <TwoValuesContainer/>
             </div>
         </div>
     )
