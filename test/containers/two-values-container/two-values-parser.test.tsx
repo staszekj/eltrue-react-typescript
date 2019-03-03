@@ -26,4 +26,10 @@ describe('TwoValuesParser', () => {
 
         expect(val).toBeNull()
     })
+
+    it('should parse value to null for digits and letters', () => {
+        const val = parse('12o3')
+
+        expect(val).toBeNull()
+    })
 })

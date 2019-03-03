@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FunctionComponent} from 'react';
-import {TwoInputsValuesType} from '../../components/two-inputs/two-inputs.type';
+import {TwoInputsValuesType} from 'type/components/two-inputs/two-inputs.type';
 
 export type TwoValuesContainerStateType = TwoInputsValuesType
 export type TwoValuesContainerType = FunctionComponent<TwoValuesContainerStateType>

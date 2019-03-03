@@ -59,13 +59,31 @@
     }
 
     .value1 {
-      width: 50px;
       background-color: deeppink;
     }
 
     .value2 {
-      width: 50px;
       background-color: lightgreen;
+    }
+
+    .regular-color {
+      .value1 {
+        background-color: deeppink;
+      }
+
+      .value2 {
+        background-color: lightgreen;
+      }
+    }
+
+    .bw-color {
+      .value1 {
+        background-color: gray;
+      }
+
+      .value2 {
+        background-color: white;
+      }
     }
 
     .text {
@@ -93,6 +111,10 @@
     .input2 {
       float: right;
       border-color: lightgreen;
+    }
+
+    input.error {
+      background-color: red;
     }
 
     .background-color-green {

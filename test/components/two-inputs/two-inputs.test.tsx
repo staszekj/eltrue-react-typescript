@@ -4,6 +4,12 @@ import {ReactTestInstance, ReactTestRenderer} from 'react-test-renderer';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {expand} from 'rxjs/operators';
 import {ChangeEvent} from 'react';
+import {parse} from 'app/containers/two-values-parser';
+import {validate} from 'app/containers/two-values-container';
+
+jest.mock('app/containers/two-values-container')
+
+const validateMock = validate as jest.Mock
 
 describe('<TwoInputs />', () => {
 
@@ -17,6 +23,9 @@ describe('<TwoInputs />', () => {
 
     beforeEach(() => {
         onChangeStubFn.mockReset()
+
+        validateMock.mockReset()
+        validateMock.mockReturnValue(true)
     })
 
     it('should render two inputs element with value and className properties', () => {
@@ -24,11 +33,9 @@ describe('<TwoInputs />', () => {
         const twoInputsWrap: ReactTestInstance = TestRenderer.create(<TwoInputs leftInput={'10'}
                                                                                 rightInput={'20'}
                                                                                 onChange={onChangeStubFn}/>).root
-        const divWrap = twoInputsWrap.findByProps({className: 'right-panel background-color-green'})
-        const leftInputInst = divWrap.find(el => el.type === 'input' && el.props['className'] === 'input1')
-        const rightInputWrap = divWrap.find(el => el.type === 'input' && el.props['className'] === 'input2')
+        const leftInputInst = twoInputsWrap.find(el => el.type === 'input' && el.props['className'] === 'input1')
+        const rightInputWrap = twoInputsWrap.find(el => el.type === 'input' && el.props['className'] === 'input2')
 
-        expect(divWrap).toBeTruthy()
         expect(leftInputInst.props['value']).toEqual('10')
         expect(rightInputWrap.props['value']).toEqual('20')
     })
@@ -37,8 +44,7 @@ describe('<TwoInputs />', () => {
         const twoInputsInst: ReactTestInstance = TestRenderer.create(<TwoInputs leftInput={'10'}
                                                                                 rightInput={'20'}
                                                                                 onChange={onChangeStubFn}/>).root
-        const divInst = twoInputsInst.findByProps({className: 'right-panel background-color-green'})
-        const leftInputInst = divInst.find(el => el.type === 'input' && el.props['className'] === 'input1')
+        const leftInputInst = twoInputsInst.find(el => el.type === 'input' && el.props['className'] === 'input1')
         const leftInputOnChange = leftInputInst.props['onChange']
 
         leftInputOnChange(changeEvent)
@@ -56,5 +62,37 @@ describe('<TwoInputs />', () => {
         rightInputOnChange(changeEvent)
 
         expect(onChangeStubFn).toBeCalledWith('10', '123')
+    })
+
+    it('should render error className', () => {
+
+        validateMock.mockReturnValue(false)
+
+        const twoInputsInst: ReactTestInstance = TestRenderer.create(<TwoInputs leftInput={'-10'}
+                                                                                rightInput={'-20'}
+                                                                                onChange={onChangeStubFn}/>).root
+        const leftInputInst = twoInputsInst.find(el => el.type === 'input' && el.props['className'].includes('input1'))
+        const rightInputWrap = twoInputsInst.find(el => el.type === 'input' && el.props['className'].includes('input2'))
+
+        expect(validateMock.mock.calls[0][0]).toEqual('-10')
+        expect(validateMock.mock.calls[1][0]).toEqual('-20')
+        expect(leftInputInst.props['className']).toEqual('input1 error')
+        expect(rightInputWrap.props['className']).toEqual('input2 error')
+    })
+
+    it('should render no error className', () => {
+
+        validateMock.mockReturnValue(true)
+
+        const twoInputsInst: ReactTestInstance = TestRenderer.create(<TwoInputs leftInput={'10'}
+                                                                                rightInput={'20'}
+                                                                                onChange={onChangeStubFn}/>).root
+        const leftInputInst = twoInputsInst.find(el => el.type === 'input' && el.props['className'].includes('input1'))
+        const rightInputWrap = twoInputsInst.find(el => el.type === 'input' && el.props['className'].includes('input2'))
+
+        expect(validateMock.mock.calls[0][0]).toEqual('10')
+        expect(validateMock.mock.calls[1][0]).toEqual('20')
+        expect(leftInputInst.props['className']).toEqual('input1')
+        expect(rightInputWrap.props['className']).toEqual('input2')
     })
 })

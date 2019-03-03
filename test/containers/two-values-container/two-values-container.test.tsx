@@ -5,7 +5,6 @@ import {parse} from 'app/containers/two-values-parser';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {onChangeFnType} from 'type/components/two-inputs/two-inputs.type';
 import {ReactTestInstance} from 'react-test-renderer';
-import {ParseFnType} from '../../../type/containers/two-values/two-values-container.type';
 
 jest.mock('app/containers/two-values-parser')
 
