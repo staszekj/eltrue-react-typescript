@@ -3,9 +3,11 @@ import {BarType} from 'type/components/two-bars/bar.type';
 
 export const Bar: BarType = (props) => {
 
-    const width = `${props.width}px`
+    const width = props.width
+    const widthPx = `${props.width}px`
     return (
-        <div className={`value-container ${props.cssClass}`} style={{width: width}}><span className="text">60</span>
+        <div className={`value-container ${props.cssClass}`} style={{width: widthPx}}><span
+            className="text">{width}</span>
         </div>
     )
 }
