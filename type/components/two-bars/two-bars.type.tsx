@@ -7,6 +7,9 @@ export const enum ColorCssClassEnum {
     bwColor = 'bwColor'
 }
 
+export type TwoBarsFactoryType = (colorClass: ColorCssClassEnum) =>
+    (leftWidth: number, rightWidth: number) => ReactComponentElement<TwoBarsType>
+
 export type TwoBarsPropType = {
     leftBar: ReactComponentElement<BarType>,
     rightBar: ReactComponentElement<BarType>

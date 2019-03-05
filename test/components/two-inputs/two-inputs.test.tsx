@@ -13,7 +13,7 @@ const validateMock = validate as jest.Mock
 
 describe('<TwoInputs />', () => {
 
-    const changeEvent: ChangeEvent<HTMLInputElement> = {
+    const changeEvent = {
         target: {
             value: '123'
         },
