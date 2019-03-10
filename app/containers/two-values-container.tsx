@@ -7,6 +7,8 @@ import {
 } from 'type/containers/two-values/two-values-container.type';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {parse} from 'app/containers/two-values-parser';
+import {HeaderValues} from '../components/header-values/header-values';
+import {ColorCssClassEnum} from '../../type/components/two-bars/two-bars.type';
 
 export const validate: ValidateFnType = (value) => {
     return parse(value) !== null
@@ -32,15 +34,18 @@ export const TwoValuesContainer: TwoValuesContainerType = (props) => {
     const rightInputNumber: number = rightInputParsed ? rightInputParsed : 0
 
     return (
-        <div className="main">
-            <div className="left-panel">
-                {props.twoBarsFactoryFn(leftInputNumber, rightInputNumber)}
-            </div>
-            <div className={'right-panel background-color-green'}>
-                <TwoInputs
-                    leftInput={inputValues.leftInput}
-                    rightInput={inputValues.rightInput}
-                    onChange={onChangeHandler}/>
+        <div>
+            <HeaderValues leftValue={10} rightValue={20} result={30} colorClass={ColorCssClassEnum.regularColor}/>).root
+            <div className="main">
+                <div className="left-panel">
+                    {props.twoBarsFactoryFn(leftInputNumber, rightInputNumber)}
+                </div>
+                <div className={'right-panel background-color-green'}>
+                    <TwoInputs
+                        leftInput={inputValues.leftInput}
+                        rightInput={inputValues.rightInput}
+                        onChange={onChangeHandler}/>
+                </div>
             </div>
         </div>
     )
