@@ -1,12 +1,12 @@
 import * as React from 'react'
 import * as TestRenderer from 'react-test-renderer';
 import {ReactTestInstance} from 'react-test-renderer';
-import {TwoValuesContainer, validate} from 'app/containers/two-values-container';
-import {parse} from 'app/containers/two-values-parser';
+import {TwoValuesContainer, validate} from 'app/containers/two-inputs/two-values-container';
+import {parse} from 'app/containers/two-inputs/two-values-parser';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {onChangeFnType} from 'app/components/two-inputs/two-inputs';
 
-jest.mock('app/containers/two-values-parser')
+jest.mock('app/containers/two-inputs/two-values-parser')
 
 const parseMock = parse as jest.Mock
 

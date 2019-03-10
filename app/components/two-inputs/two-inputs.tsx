@@ -1,20 +1,20 @@
 import * as React from 'react'
 import {ChangeEvent} from 'react';
-import {validate} from 'app/containers/two-values-container';
+import {validate} from 'app/containers/two-inputs/two-values-container';
 import {FunctionComponent} from 'react';
+
+export type onChangeFnType = (leftInput: string, rightInput: string) => void
+
+export type TwoInputsActionsType = {
+    onChange: onChangeFnType
+}
 
 export type TwoInputsValuesType = {
     leftInput: string,
     rightInput: string,
 }
 
-export type TwoInputsActionsType = {
-    onChange: onChangeFnType
-}
-
 export type TwoInputsPropType = TwoInputsValuesType & TwoInputsActionsType
-
-export type onChangeFnType = (leftInput: string, rightInput: string) => void
 
 export type TwoInputsType = FunctionComponent<TwoInputsPropType>
 

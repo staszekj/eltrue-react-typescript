@@ -2,7 +2,7 @@ import * as React from 'react'
 import {MouseEventHandler, useState} from 'react'
 import {TwoBarsContainerType} from 'type/containers/two-bars/two-bars-container.type';
 import {ColorCssClassEnum} from 'type/components/two-bars/two-bars.type';
-import {TwoValuesContainer} from 'app/containers/two-values-container';
+import {TwoValuesContainer} from 'app/containers/two-inputs/two-values-container';
 import {twoBarsFactory} from 'app/components/two-bars/two-bars';
 import {headerValuesFactory} from 'app/components/header-values/header-values';
 

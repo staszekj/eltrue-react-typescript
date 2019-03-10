@@ -1,10 +1,9 @@
 import * as React from 'react'
 import * as TestRenderer from 'react-test-renderer'
-import {TwoBarsContainer} from '../../../app/containers/two-bars/two-bars-container';
-import {TwoValuesContainer} from '../../../app/containers/two-values-container';
+import {TwoBarsContainer} from 'app/containers/two-bars/two-bars-container';
+import {TwoValuesContainer} from 'app/containers/two-inputs/two-values-container';
 import {twoBarsFactory} from 'app/components/two-bars/two-bars';
-import {ColorCssClassEnum} from '../../../type/components/two-bars/two-bars.type';
-import {mockComponent} from 'react-dom/test-utils';
+import {ColorCssClassEnum} from 'type/components/two-bars/two-bars.type';
 
 jest.mock('app/components/two-bars/two-bars')
 const twoBarsFactoryMock = twoBarsFactory as jest.Mock;

@@ -1,14 +1,21 @@
 import * as React from 'react'
-import {onChangeFnType} from 'app/components/two-inputs/two-inputs';
+import {onChangeFnType, TwoInputsValuesType} from 'app/components/two-inputs/two-inputs';
 import {useState} from 'react';
-import {
-    TwoValuesContainerStateType,
-    TwoValuesContainerType, ValidateFnType
-} from 'type/containers/two-values/two-values-container.type';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
-import {parse} from 'app/containers/two-values-parser';
-import {HeaderValues} from '../components/header-values/header-values';
-import {ColorCssClassEnum} from '../../type/components/two-bars/two-bars.type';
+import {parse} from 'app/containers/two-inputs/two-values-parser';
+import {HeaderValuesFactoryFnType} from 'app/components/header-values/header-values';
+import {TwoBarsFactoryType} from 'type/components/two-bars/two-bars.type';
+import {FunctionComponent} from 'react';
+
+export type TwoValuesContainerStateType = TwoInputsValuesType
+export type TwoValuesContainerPropType = {
+    twoBarsFactoryFn: ReturnType<TwoBarsFactoryType>,
+    headerValuesFactoryFn: ReturnType<HeaderValuesFactoryFnType>
+}
+export type TwoValuesContainerType = FunctionComponent<TwoValuesContainerPropType>
+
+export type ParseFnType = (value: string) => number | null
+export type ValidateFnType = (value: string) => boolean
 
 export const validate: ValidateFnType = (value) => {
     return parse(value) !== null

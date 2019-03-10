@@ -1,4 +1,4 @@
-import {ParseFnType} from 'type/containers/two-values/two-values-container.type';
+import {ParseFnType} from 'app/containers/two-inputs/two-values-container';
 
 export const parse: ParseFnType = (value) => {
     if (/^\d+$/.test(value) == false) {

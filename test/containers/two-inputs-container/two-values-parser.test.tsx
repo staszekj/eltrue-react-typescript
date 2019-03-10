@@ -1,4 +1,4 @@
-import {parse} from 'app/containers/two-values-parser';
+import {parse} from 'app/containers/two-inputs/two-values-parser';
 
 describe('TwoValuesParser', () => {
 
