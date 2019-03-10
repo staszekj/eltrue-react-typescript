@@ -1,7 +1,22 @@
 import * as React from 'react'
-import {TwoInputsType} from 'type/components/two-inputs/two-inputs.type';
 import {ChangeEvent} from 'react';
 import {validate} from 'app/containers/two-values-container';
+import {FunctionComponent} from 'react';
+
+export type TwoInputsValuesType = {
+    leftInput: string,
+    rightInput: string,
+}
+
+export type TwoInputsActionsType = {
+    onChange: onChangeFnType
+}
+
+export type TwoInputsPropType = TwoInputsValuesType & TwoInputsActionsType
+
+export type onChangeFnType = (leftInput: string, rightInput: string) => void
+
+export type TwoInputsType = FunctionComponent<TwoInputsPropType>
 
 export const TwoInputs: TwoInputsType = (props) => {
 
@@ -19,9 +34,9 @@ export const TwoInputs: TwoInputsType = (props) => {
     const rightCss = `input2${rightErrorCss}`
 
     return (
-        <>
+        <div>
             <input className={leftCss} value={props.leftInput} onChange={leftInputOnChangeHandler}/>
             <input className={rightCss} value={props.rightInput} onChange={rightInputOnChangeHandler}/>
-        </>
+        </div>
     )
 }

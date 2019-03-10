@@ -4,6 +4,7 @@ import {TwoBarsContainerType} from 'type/containers/two-bars/two-bars-container.
 import {ColorCssClassEnum} from 'type/components/two-bars/two-bars.type';
 import {TwoValuesContainer} from 'app/containers/two-values-container';
 import {twoBarsFactory} from 'app/components/two-bars/two-bars';
+import {headerValuesFactory} from 'app/components/header-values/header-values';
 
 export const TwoBarsContainer: TwoBarsContainerType = (props) => {
     const [colorClass, setColorClass] = useState(ColorCssClassEnum.regularColor)
@@ -16,8 +17,9 @@ export const TwoBarsContainer: TwoBarsContainerType = (props) => {
     }
 
     const twoBarsFct = twoBarsFactory(colorClass, handler)
+    const headerValuesFactoryFn = headerValuesFactory(colorClass)
 
     return (
-        <TwoValuesContainer twoBarsFactoryFn={twoBarsFct}/>
+        <TwoValuesContainer twoBarsFactoryFn={twoBarsFct} headerValuesFactoryFn={headerValuesFactoryFn}/>
     )
 }

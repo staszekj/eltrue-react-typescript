@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {onChangeFnType} from 'type/components/two-inputs/two-inputs.type';
+import {onChangeFnType} from 'app/components/two-inputs/two-inputs';
 import {useState} from 'react';
 import {
     TwoValuesContainerStateType,
@@ -33,9 +33,12 @@ export const TwoValuesContainer: TwoValuesContainerType = (props) => {
     const rightInputParsed: number | null = parse(inputValues.rightInput)
     const rightInputNumber: number = rightInputParsed ? rightInputParsed : 0
 
+    const resultNumber: number | null =
+        leftInputParsed === null || rightInputParsed === null ? null : leftInputParsed + rightInputParsed
+
     return (
         <div>
-            <HeaderValues leftValue={10} rightValue={20} result={30} colorClass={ColorCssClassEnum.regularColor}/>).root
+            {props.headerValuesFactoryFn(leftInputParsed, rightInputParsed, resultNumber)}
             <div className="main">
                 <div className="left-panel">
                     {props.twoBarsFactoryFn(leftInputNumber, rightInputNumber)}

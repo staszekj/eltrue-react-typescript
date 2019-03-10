@@ -22,7 +22,7 @@ export const format: (val: number | null) => string = (val) => {
     return '' + val
 }
 
-export const HeaderValuesFactory: HeaderValuesFactoryFnType = (colorClass) => (leftValue, rightValue, resultValue) => {
+export const headerValuesFactory: HeaderValuesFactoryFnType = (colorClass) => (leftValue, rightValue, resultValue) => {
     return (
         <HeaderValues colorClass={colorClass} leftValue={leftValue} rightValue={rightValue} result={resultValue}/>
     )

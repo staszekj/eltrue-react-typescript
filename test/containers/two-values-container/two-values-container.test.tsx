@@ -4,12 +4,7 @@ import {ReactTestInstance} from 'react-test-renderer';
 import {TwoValuesContainer, validate} from 'app/containers/two-values-container';
 import {parse} from 'app/containers/two-values-parser';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
-import {onChangeFnType} from 'type/components/two-inputs/two-inputs.type';
-import {TwoBars, twoBarsFactory} from '../../../app/components/two-bars/two-bars';
-import {ColorCssClassEnum} from '../../../type/components/two-bars/two-bars.type';
-import {Bar} from '../../../app/components/two-bars/bar';
-import {BAR_CSS_CLASS, BarType} from '../../../type/components/two-bars/bar.type';
-import {ReactComponentElement} from 'react';
+import {onChangeFnType} from 'app/components/two-inputs/two-inputs';
 
 jest.mock('app/containers/two-values-parser')
 
@@ -19,6 +14,7 @@ describe('<TwoValuesContainer />', () => {
 
     let twoValuesContainerInst: ReactTestInstance;
     const twoBarsFactoryFnMock = jest.fn() as jest.Mock
+    const headerValuesFactoryFnMock = jest.fn() as jest.Mock
     const TwoBarsMock = () => <div/>
 
     beforeEach(() => {
@@ -26,7 +22,7 @@ describe('<TwoValuesContainer />', () => {
 
         twoBarsFactoryFnMock.mockReturnValue(<TwoBarsMock/>)
         twoValuesContainerInst = TestRenderer.create(<TwoValuesContainer
-            twoBarsFactoryFn={twoBarsFactoryFnMock}/>).root
+            twoBarsFactoryFn={twoBarsFactoryFnMock} headerValuesFactoryFn={headerValuesFactoryFnMock}/>).root
     })
 
     it('should handle onChange', () => {
@@ -48,6 +44,7 @@ describe('<TwoValuesContainer />', () => {
         expect(twoInputsInst.props['leftInput']).toEqual('50')
         expect(twoInputsInst.props['rightInput']).toEqual('80')
         expect(twoBarsFactoryFnMock).toHaveBeenCalledWith(50, 80)
+        expect(headerValuesFactoryFnMock).toHaveBeenCalledWith(50, 80, 130)
     })
 
     it('should have function instance', () => {
