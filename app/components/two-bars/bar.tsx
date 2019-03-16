@@ -3,14 +3,13 @@ import {FunctionComponent} from 'react';
 import {BAR_CSS_CLASS} from '../../containers/two-inputs/two-values-container';
 import {MouseEventHandler} from 'react';
 
-export type BarValuesType = {
+export type BarClickHandlerType = MouseEventHandler<HTMLDivElement>
+export type BarPropType = {
     cssClass: BAR_CSS_CLASS,
     width: number,
     clickHandler: BarClickHandlerType
 }
 export type BarType = FunctionComponent<BarPropType>
-export type BarPropType = BarValuesType
-export type BarClickHandlerType = MouseEventHandler<HTMLDivElement>
 
 export const Bar: BarType = (props) => {
 
