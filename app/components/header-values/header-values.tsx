@@ -9,10 +9,6 @@ export type HeaderValuesPropsType = {
     rightValue: number | null,
     result: number | null
 }
-export type HeaderValuesTypes = FunctionComponent<HeaderValuesPropsType>
-
-export type HeaderValuesFactoryFnType = (colorClass: ColorCssClassEnum) =>
-    (leftValue: number | null, rightValue: number | null, resultValue: number | null) => ReactComponentElement<HeaderValuesTypes>
 
 export const format: (val: number | null) => string = (val) => {
     if (val === null) {
@@ -21,13 +17,7 @@ export const format: (val: number | null) => string = (val) => {
     return '' + val
 }
 
-export const headerValuesFactory: HeaderValuesFactoryFnType = (colorClass) => (leftValue, rightValue, resultValue) => {
-    return (
-        <HeaderValues colorClass={colorClass} leftValue={leftValue} rightValue={rightValue} result={resultValue}/>
-    )
-}
-
-export const HeaderValues: HeaderValuesTypes = (props) => {
+export const HeaderValues: FunctionComponent<HeaderValuesPropsType> = (props) => {
     const colorClass = props.colorClass
     const leftValue: string = format(props.leftValue)
     const rightValue: string = format(props.rightValue)

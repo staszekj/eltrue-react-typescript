@@ -1,7 +1,6 @@
 import * as React from 'react'
 import {FunctionComponent, MouseEventHandler, useState} from 'react'
 import {TwoValuesContainer} from 'app/containers/two-inputs/two-values-container';
-import {headerValuesFactory} from 'app/components/header-values/header-values';
 
 export const enum ColorCssClassEnum {
     regularColor = 'regularColor',
@@ -32,9 +31,7 @@ export const TwoBarsContainer: TwoBarsContainerType = (props) => {
         }
     }
 
-    const headerValuesFactoryFn = headerValuesFactory(colorClass)
-
     return (
-        <TwoValuesContainer twoBarsContainerOutput={twoBarsProp} headerValuesFactoryFn={headerValuesFactoryFn}/>
+        <TwoValuesContainer twoBarsContainerOutput={twoBarsProp}/>
     )
 }

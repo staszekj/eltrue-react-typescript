@@ -10,6 +10,7 @@ import {parse, getAsNumber, sumUpInputValues} from 'app/containers/two-inputs/tw
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {ColorCssClassEnum} from 'app/containers/two-bars/two-bars-container';
 import {TwoBars} from 'app/components/two-bars/two-bars';
+import {HeaderValues} from '../../../app/components/header-values/header-values';
 
 jest.mock('app/containers/two-inputs/two-values-parser')
 
@@ -19,9 +20,8 @@ const sumUpInputValuesMock = sumUpInputValues as jest.Mock
 
 describe('<TwoValuesContainer />', () => {
 
-    let twoValuesContainerInst: ReactTestInstance;
+    let twoValuesContainerEl: ReactTestInstance;
     const twoBarsFactoryFnMock = jest.fn() as jest.Mock
-    const headerValuesFactoryFnMock = jest.fn() as jest.Mock
 
     beforeEach(() => {
         parseMock.mockReset()
@@ -31,13 +31,22 @@ describe('<TwoValuesContainer />', () => {
         sumUpInputValuesMock.mockReset()
         sumUpInputValuesMock.mockImplementation(inputValues => parseMock(inputValues.leftInput) + parseMock(inputValues.rightInput))
 
-        twoValuesContainerInst = TestRenderer.create(<TwoValuesContainer
-            twoBarsContainerOutput={{colorClass: ColorCssClassEnum.bwColor, clickHandler: twoBarsFactoryFnMock}}
-            headerValuesFactoryFn={headerValuesFactoryFnMock}/>).root
+        twoValuesContainerEl = TestRenderer.create(<TwoValuesContainer
+            twoBarsContainerOutput={{colorClass: ColorCssClassEnum.bwColor, clickHandler: twoBarsFactoryFnMock}}/>).root
     })
 
+    it('should render header values', () => {
+        const headerValuesEl = twoValuesContainerEl.findByType(HeaderValues)
+
+        expect(headerValuesEl.props['colorClass']).toEqual(ColorCssClassEnum.bwColor)
+        expect(headerValuesEl.props['leftValue']).toEqual(10)
+        expect(headerValuesEl.props['rightValue']).toEqual(20)
+        expect(headerValuesEl.props['result']).toEqual(30)
+    })
+
+
     it('should handle onChange', () => {
-        const twoInputsEl = twoValuesContainerInst.findByType(TwoInputs)
+        const twoInputsEl = twoValuesContainerEl.findByType(TwoInputs)
         const onChangeFn: onChangeFnType = twoInputsEl.props['onChange']
 
         TestRenderer.act(() => {
@@ -46,11 +55,10 @@ describe('<TwoValuesContainer />', () => {
 
         expect(twoInputsEl.props['leftInput']).toEqual('50')
         expect(twoInputsEl.props['rightInput']).toEqual('80')
-        expect(headerValuesFactoryFnMock).toHaveBeenCalledWith(50, 80, 130)
     })
 
     it('should have function instance', () => {
-        const leftPanelDivInst = twoValuesContainerInst.findByProps({className: 'left-panel'})
+        const leftPanelDivInst = twoValuesContainerEl.findByProps({className: 'left-panel'})
         const twoBarsEl = leftPanelDivInst.findByType(TwoBars)
         const leftBarEl = twoBarsEl.props['leftBar']
         const rightBarEl = twoBarsEl.props['rightBar']
@@ -62,7 +70,7 @@ describe('<TwoValuesContainer />', () => {
 
     it('should handle onChange with empty values', () => {
 
-        const twoInputsEl = twoValuesContainerInst.findByType(TwoInputs)
+        const twoInputsEl = twoValuesContainerEl.findByType(TwoInputs)
         const onChangeFn: onChangeFnType = twoInputsEl.props['onChange']
 
         TestRenderer.act(() => {

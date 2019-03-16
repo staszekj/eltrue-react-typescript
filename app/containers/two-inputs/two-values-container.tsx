@@ -2,10 +2,10 @@ import * as React from 'react'
 import {FunctionComponent, MouseEventHandler, useState} from 'react'
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {getAsNumber, parse, sumUpInputValues} from 'app/containers/two-inputs/two-values-parser';
-import {HeaderValuesFactoryFnType} from 'app/components/header-values/header-values';
 import {TwoBars} from 'app/components/two-bars/two-bars';
 import {TwoBarsContainerOutputType} from '../two-bars/two-bars-container';
 import {Bar, BarPropType} from 'app/components/two-bars/bar';
+import {HeaderValues, HeaderValuesPropsType} from '../../components/header-values/header-values';
 
 export const enum BAR_CSS_CLASS {
     LEFT_BAR = 'value1',
@@ -26,7 +26,6 @@ export type TwoValuesContainerStateType = TwoInputsValuesType
 
 export type TwoValuesContainerPropType = {
     twoBarsContainerOutput: TwoBarsContainerOutputType,
-    headerValuesFactoryFn: ReturnType<HeaderValuesFactoryFnType>
 }
 
 export type onChangeFnType = (leftInput: string, rightInput: string) => void
@@ -64,9 +63,13 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
         width: getAsNumber(parse(inputValues.rightInput))
     }
 
-    const twoInputProps: TwoInputsPropType = {
+    const twoInputValuesProps: TwoInputsValuesType = {
         leftInput: inputValues.leftInput,
         rightInput: inputValues.rightInput,
+    }
+
+    const twoInputProps: TwoInputsPropType = {
+        ...twoInputValuesProps,
         onChange: (leftInput, rightInput) => {
             setInputValues({
                 leftInput,
@@ -75,9 +78,16 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
         }
     }
 
+    const headerValuesProps: HeaderValuesPropsType = {
+        colorClass: twoBarsContainerOutput.colorClass,
+        leftValue: parse(inputValues.leftInput),
+        rightValue: parse(inputValues.rightInput),
+        result: sumUpInputValues(twoInputValuesProps)
+    }
+
     return (
         <div>
-            {props.headerValuesFactoryFn(parse(inputValues.leftInput), parse(inputValues.rightInput), sumUpInputValues(inputValues))}
+            <HeaderValues {...headerValuesProps}/>
             <div className="main">
                 <div className="left-panel">
                     <TwoBars {...twoBarsProps}
