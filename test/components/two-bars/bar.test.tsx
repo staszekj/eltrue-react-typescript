@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as TestRenderer from 'react-test-renderer'
 import {Bar} from 'app/components/two-bars/bar'
-import {BAR_CSS_CLASS, BarClickHandlerType} from 'type/components/two-bars/bar.type';
+import {BAR_CSS_CLASS} from 'app/containers/two-inputs/two-values-container';
 
 describe('<Bar />', () => {
 

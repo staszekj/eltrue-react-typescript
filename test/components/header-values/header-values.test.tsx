@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as TestRenderer from 'react-test-renderer'
 import {format, HeaderValues} from '../../../app/components/header-values/header-values';
-import {ColorCssClassEnum} from '../../../type/components/two-bars/two-bars.type';
+import {ColorCssClassEnum} from 'app/containers/two-bars/two-bars-container';
 
 describe('<Header Values />', () => {
     it('should render values', () => {

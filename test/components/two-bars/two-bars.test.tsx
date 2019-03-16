@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {ReactComponentElement} from 'react'
 import * as TestRenderer from 'react-test-renderer'
-import {TwoBars, twoBarsFactory} from '../../../app/components/two-bars/two-bars';
+import {TwoBars, TwoBarsPropType} from '../../../app/components/two-bars/two-bars';
 import {Bar} from '../../../app/components/two-bars/bar';
-import {BAR_CSS_CLASS} from '../../../type/components/two-bars/bar.type';
-import {ColorCssClassEnum, TwoBarsType} from '../../../type/components/two-bars/two-bars.type';
+import {BAR_CSS_CLASS} from '../../../app/containers/two-inputs/two-values-container';
+import {ColorCssClassEnum} from '../../../app/containers/two-bars/two-bars-container';
 
 describe('<TwoBars />', () => {
     const twoBarsClickHandlerMock = jest.fn().mockReturnValue('twoBarsClickHandlerMock') as jest.Mock
@@ -39,11 +39,4 @@ describe('<TwoBars />', () => {
 
         expect(divInst.props['className'].includes(ColorCssClassEnum.bwColor)).toBeTruthy()
     });
-
-    it('should create instance of TwoBars', () => {
-        const twoBarsReactInst: ReactComponentElement<TwoBarsType> = twoBarsFactory(ColorCssClassEnum.regularColor, twoBarsClickHandlerMock)(10, 20)
-        expect(twoBarsReactInst.props.colorClass).toEqual(ColorCssClassEnum.regularColor)
-        expect(twoBarsReactInst.props.leftBar.props.width).toEqual(10)
-        expect(twoBarsReactInst.props.rightBar.props.width).toEqual(20)
-    })
 });

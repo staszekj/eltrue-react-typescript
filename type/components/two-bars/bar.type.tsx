@@ -1,10 +1,6 @@
 import * as React from 'react';
 import {FunctionComponent, MouseEventHandler} from 'react';
-
-export const enum BAR_CSS_CLASS {
-    LEFT_BAR = 'value1',
-    RIGHT_BAR = 'value2'
-}
+import {BAR_CSS_CLASS} from 'app/containers/two-inputs/two-values-container';
 
 export type BarClickHandlerType = MouseEventHandler<HTMLDivElement>
 

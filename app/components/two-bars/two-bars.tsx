@@ -1,19 +1,17 @@
 import * as React from 'react';
-import {ColorCssClassEnum, TwoBarsFactoryType, TwoBarsType} from 'type/components/two-bars/two-bars.type';
 import {Bar} from './bar';
-import {BAR_CSS_CLASS} from 'type/components/two-bars/bar.type';
+import {BarType} from 'type/components/two-bars/bar.type';
+import {MouseEventHandler} from 'react';
+import {ReactComponentElement} from 'react';
+import {FunctionComponent} from 'react';
+import {TwoBarsContainerOutputType, TwoBarsPropValuesType} from '../../containers/two-bars/two-bars-container';
 
-export const twoBarsFactory: TwoBarsFactoryType = (colorClass, clickHandler) =>
-    (leftWidth, rightWidth) => {
-        return (
-            <TwoBars colorClass={colorClass}
-                     leftBar={<Bar cssClass={BAR_CSS_CLASS.LEFT_BAR} width={leftWidth} clickHandler={clickHandler}/>}
-                     rightBar={<Bar cssClass={BAR_CSS_CLASS.RIGHT_BAR} width={rightWidth}
-                                    clickHandler={clickHandler}/>}/>
-        )
-    }
+export type TwoBarsPropType = TwoBarsPropValuesType & {
+    leftBar: ReactComponentElement<BarType>,
+    rightBar: ReactComponentElement<BarType>
+}
 
-export const TwoBars: TwoBarsType = (props) => {
+export const TwoBars: FunctionComponent<TwoBarsPropType> = (props) => {
     return (
         <div className={`values ${props.colorClass}`}>
             {props.leftBar}

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {FunctionComponent} from 'react';
-import {MouseEventHandler} from 'react';
 import {ReactComponentElement} from 'react';
-import {ColorCssClassEnum, TwoBarsType} from '../../../type/components/two-bars/two-bars.type';
+import {ColorCssClassEnum} from '../../containers/two-bars/two-bars-container';
 
 export type HeaderValuesPropsType = {
     colorClass: ColorCssClassEnum,

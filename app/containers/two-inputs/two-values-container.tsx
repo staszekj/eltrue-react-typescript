@@ -1,60 +1,93 @@
 import * as React from 'react'
-import {onChangeFnType, TwoInputsValuesType} from 'app/components/two-inputs/two-inputs';
-import {useState} from 'react';
+import {FunctionComponent, MouseEventHandler, useState} from 'react'
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
-import {parse} from 'app/containers/two-inputs/two-values-parser';
+import {getAsNumber, parse, sumUpInputValues} from 'app/containers/two-inputs/two-values-parser';
 import {HeaderValuesFactoryFnType} from 'app/components/header-values/header-values';
-import {TwoBarsFactoryType} from 'type/components/two-bars/two-bars.type';
-import {FunctionComponent} from 'react';
+import {TwoBars} from 'app/components/two-bars/two-bars';
+import {TwoBarsContainerOutputType} from '../two-bars/two-bars-container';
+import {Bar} from '../../components/two-bars/bar';
+import {BarPropType} from '../../../type/components/two-bars/bar.type';
 
+export const enum BAR_CSS_CLASS {
+    LEFT_BAR = 'value1',
+    RIGHT_BAR = 'value2'
+}
+
+// types
+
+export type TwoInputsValuesType = {
+    leftInput: string,
+    rightInput: string,
+}
+
+export type TwoInputsPropType = TwoInputsValuesType & {
+    onChange: onChangeFnType,
+}
 export type TwoValuesContainerStateType = TwoInputsValuesType
+
 export type TwoValuesContainerPropType = {
-    twoBarsFactoryFn: ReturnType<TwoBarsFactoryType>,
+    twoBarsContainerOutput: TwoBarsContainerOutputType,
     headerValuesFactoryFn: ReturnType<HeaderValuesFactoryFnType>
 }
-export type TwoValuesContainerType = FunctionComponent<TwoValuesContainerPropType>
 
-export type ParseFnType = (value: string) => number | null
-export type ValidateFnType = (value: string) => boolean
+export type onChangeFnType = (leftInput: string, rightInput: string) => void
 
-export const validate: ValidateFnType = (value) => {
-    return parse(value) !== null
+export type BarClickHandlerType = MouseEventHandler<HTMLDivElement>
+
+export type BarValuesType = {
+    cssClass: BAR_CSS_CLASS,
+    width: number,
+    clickHandler: BarClickHandlerType
 }
 
-export const TwoValuesContainer: TwoValuesContainerType = (props) => {
-    const initState: TwoValuesContainerStateType = {
+// implementation
+
+export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> = (props) => {
+    const {twoBarsContainerOutput} = props
+    const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>({
         leftInput: '10',
         rightInput: '20'
-    }
-    const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
-    const onChangeHandler: onChangeFnType = (leftInput, rightInput) => {
-        setInputValues({
-            leftInput,
-            rightInput
-        })
+    })
+
+    const twoBarsProps: TwoBarsContainerOutputType = {
+        ...twoBarsContainerOutput
     }
 
-    const leftInputParsed: number | null = parse(inputValues.leftInput)
-    const leftInputNumber: number = leftInputParsed ? leftInputParsed : 0
+    const leftBarProps: BarPropType = {
+        ...twoBarsContainerOutput,
+        cssClass: BAR_CSS_CLASS.LEFT_BAR,
+        width: getAsNumber(parse(inputValues.leftInput))
+    }
 
-    const rightInputParsed: number | null = parse(inputValues.rightInput)
-    const rightInputNumber: number = rightInputParsed ? rightInputParsed : 0
+    const rightBarProps: BarPropType = {
+        ...twoBarsProps,
+        cssClass: BAR_CSS_CLASS.RIGHT_BAR,
+        width: getAsNumber(parse(inputValues.rightInput))
+    }
 
-    const resultNumber: number | null =
-        leftInputParsed === null || rightInputParsed === null ? null : leftInputParsed + rightInputParsed
+    const twoInputProps: TwoInputsPropType = {
+        leftInput: inputValues.leftInput,
+        rightInput: inputValues.rightInput,
+        onChange: (leftInput, rightInput) => {
+            setInputValues({
+                leftInput,
+                rightInput
+            })
+        }
+    }
 
     return (
         <div>
-            {props.headerValuesFactoryFn(leftInputParsed, rightInputParsed, resultNumber)}
+            {props.headerValuesFactoryFn(parse(inputValues.leftInput), parse(inputValues.rightInput), sumUpInputValues(inputValues))}
             <div className="main">
                 <div className="left-panel">
-                    {props.twoBarsFactoryFn(leftInputNumber, rightInputNumber)}
+                    <TwoBars {...twoBarsProps}
+                             leftBar={<Bar {...leftBarProps}/>}
+                             rightBar={<Bar {...rightBarProps}/>}
+                    />
                 </div>
                 <div className={'right-panel background-color-green'}>
-                    <TwoInputs
-                        leftInput={inputValues.leftInput}
-                        rightInput={inputValues.rightInput}
-                        onChange={onChangeHandler}/>
+                    <TwoInputs {...twoInputProps}/>
                 </div>
             </div>
         </div>
