@@ -16,7 +16,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'public'),
-        filename: '[name].js'
+        filename: '[name].[hash].js'
     },
     module: {
         rules
@@ -50,15 +50,14 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         alias: {
             "app": path.resolve(__dirname, './app/'),
-            "type": path.resolve(__dirname, './type/'),
             "test": path.resolve(__dirname, './test/'),
         }
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
+            filename: "[name].[hash].css",
+            chunkFilename: "[id].[hash].css"
         }),
         new HtmlWebpackPlugin({
             file: './index.html',

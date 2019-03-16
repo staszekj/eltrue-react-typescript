@@ -1,10 +1,8 @@
 import * as React from 'react';
-import {Bar} from './bar';
-import {BarType} from 'type/components/two-bars/bar.type';
-import {MouseEventHandler} from 'react';
+import {BarType} from './bar';
 import {ReactComponentElement} from 'react';
 import {FunctionComponent} from 'react';
-import {TwoBarsContainerOutputType, TwoBarsPropValuesType} from '../../containers/two-bars/two-bars-container';
+import {TwoBarsPropValuesType} from 'app/containers/two-bars/two-bars-container';
 
 export type TwoBarsPropType = TwoBarsPropValuesType & {
     leftBar: ReactComponentElement<BarType>,

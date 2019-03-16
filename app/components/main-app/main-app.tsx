@@ -1,8 +1,11 @@
 import * as React from 'react'
-import {MainAppType} from 'type/components/main-app/main-app.type';
+import {TwoBarsContainer} from '../../containers/two-bars/two-bars-container';
+import {ReactElement} from 'react';
+import {JSXElementConstructor} from 'react';
 
 import './main-app.scss'
-import {TwoBarsContainer} from '../../containers/two-bars/two-bars-container';
+
+export type MainAppType = ({}) => ReactElement<{}, JSXElementConstructor<HTMLDivElement>>
 
 export const MainApp: MainAppType = ({}) => {
 

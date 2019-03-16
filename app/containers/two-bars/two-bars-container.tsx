@@ -1,6 +1,5 @@
 import * as React from 'react'
-import {MouseEventHandler, useState} from 'react'
-import {TwoBarsContainerType} from 'type/containers/two-bars/two-bars-container.type';
+import {FunctionComponent, MouseEventHandler, useState} from 'react'
 import {TwoValuesContainer} from 'app/containers/two-inputs/two-values-container';
 import {headerValuesFactory} from 'app/components/header-values/header-values';
 
@@ -16,6 +15,9 @@ export type TwoBarsPropValuesType = {
 export type TwoBarsContainerOutputType = TwoBarsPropValuesType & {
     clickHandler: MouseEventHandler<HTMLDivElement>
 }
+
+export type TwoBarsContainerType = FunctionComponent<{}>
+
 
 export const TwoBarsContainer: TwoBarsContainerType = (props) => {
     const [colorClass, setColorClass] = useState(ColorCssClassEnum.regularColor)

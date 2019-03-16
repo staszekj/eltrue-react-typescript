@@ -1,7 +1,5 @@
 import * as React from 'react'
 import * as TestRenderer from 'react-test-renderer';
-import {MainAppType} from 'type/components/main-app/main-app.type'
-import {MouseEventHandler, ReactElement, useState} from 'react';
 import MainApp from 'app/components/main-app/main-app';
 import {ReactTestRenderer} from 'react-test-renderer';
 

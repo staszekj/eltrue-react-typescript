@@ -5,8 +5,7 @@ import {getAsNumber, parse, sumUpInputValues} from 'app/containers/two-inputs/tw
 import {HeaderValuesFactoryFnType} from 'app/components/header-values/header-values';
 import {TwoBars} from 'app/components/two-bars/two-bars';
 import {TwoBarsContainerOutputType} from '../two-bars/two-bars-container';
-import {Bar} from '../../components/two-bars/bar';
-import {BarPropType} from '../../../type/components/two-bars/bar.type';
+import {Bar, BarPropType} from 'app/components/two-bars/bar';
 
 export const enum BAR_CSS_CLASS {
     LEFT_BAR = 'value1',

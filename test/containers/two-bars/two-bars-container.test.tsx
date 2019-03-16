@@ -25,14 +25,35 @@ describe('<TwoBarsContainer />', () => {
     it('should change color class', () => {
         const twoBarsContainerInst = TestRenderer.create(<TwoBarsContainer/>).root
         const twoValuesContainerEl = twoBarsContainerInst.findByType(TwoValuesContainer)
-        const twoBarsContainerOutput: TwoBarsContainerOutputType = twoValuesContainerEl.props['twoBarsContainerOutput']
-        const clickHandler: MouseEventHandler<HTMLDivElement> = twoBarsContainerOutput.clickHandler
+        const clickHandler: MouseEventHandler<HTMLDivElement> = twoValuesContainerEl.props['twoBarsContainerOutput'].clickHandler
         const event = {} as MouseEvent<HTMLDivElement>
 
-        expect(twoBarsContainerOutput.colorClass).toEqual(ColorCssClassEnum.regularColor)
+        expect(twoValuesContainerEl.props['twoBarsContainerOutput'].colorClass).toEqual(ColorCssClassEnum.regularColor)
         TestRenderer.act(() => {
             clickHandler(event)
         })
+
+        expect(twoValuesContainerEl.props['twoBarsContainerOutput'].colorClass).toEqual(ColorCssClassEnum.bwColor)
+    })
+
+    it('should change color class back', () => {
+        const twoBarsContainerInst = TestRenderer.create(<TwoBarsContainer/>).root
+        const twoValuesContainerEl = twoBarsContainerInst.findByType(TwoValuesContainer)
+        const event = {} as MouseEvent<HTMLDivElement>
+
+        const clickHandler: MouseEventHandler<HTMLDivElement> = twoValuesContainerEl.props['twoBarsContainerOutput'].clickHandler
+        expect(twoValuesContainerEl.props['twoBarsContainerOutput'].colorClass).toEqual(ColorCssClassEnum.regularColor)
+
+        TestRenderer.act(() => {
+            clickHandler(event)
+        })
+        expect(twoValuesContainerEl.props['twoBarsContainerOutput'].colorClass).toEqual(ColorCssClassEnum.bwColor)
+
+        const clickHandler2: MouseEventHandler<HTMLDivElement> = twoValuesContainerEl.props['twoBarsContainerOutput'].clickHandler
+        TestRenderer.act(() => {
+            clickHandler2(event)
+        })
+        expect(twoValuesContainerEl.props['twoBarsContainerOutput'].colorClass).toEqual(ColorCssClassEnum.regularColor)
     })
 
 })

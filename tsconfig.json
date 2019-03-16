@@ -24,9 +24,6 @@
     "removeComments": true,
     "sourceMap": true
   },
-  "include": [
-    "type/**/*.ts"
-  ],
   "exclude": [
     "node_modules/**"
   ]
