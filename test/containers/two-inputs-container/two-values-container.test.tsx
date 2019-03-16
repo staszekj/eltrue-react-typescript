@@ -31,8 +31,8 @@ describe('<TwoValuesContainer />', () => {
         sumUpInputValuesMock.mockReset()
         sumUpInputValuesMock.mockImplementation(inputValues => parseMock(inputValues.leftInput) + parseMock(inputValues.rightInput))
 
-        twoValuesContainerEl = TestRenderer.create(<TwoValuesContainer
-            twoBarsContainerOutput={{colorClass: ColorCssClassEnum.bwColor, clickHandler: twoBarsFactoryFnMock}}/>).root
+        twoValuesContainerEl = TestRenderer.create(<TwoValuesContainer colorClass={ColorCssClassEnum.bwColor}
+                                                                       clickHandler={twoBarsFactoryFnMock}/>).root
     })
 
     it('should render header values', () => {

@@ -13,6 +13,10 @@
     "noEmitHelpers": true,
     "jsx": "react",
     "module": "esnext",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,

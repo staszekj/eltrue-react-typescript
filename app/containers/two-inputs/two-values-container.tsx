@@ -3,9 +3,9 @@ import {FunctionComponent, MouseEventHandler, useState} from 'react'
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {getAsNumber, parse, sumUpInputValues} from 'app/containers/two-inputs/two-values-parser';
 import {TwoBars} from 'app/components/two-bars/two-bars';
-import {TwoBarsContainerOutputType} from '../two-bars/two-bars-container';
 import {Bar, BarPropType} from 'app/components/two-bars/bar';
 import {HeaderValues, HeaderValuesPropsType} from '../../components/header-values/header-values';
+import {ColorCssClassEnum} from '../two-bars/two-bars-container';
 
 export const enum BAR_CSS_CLASS {
     LEFT_BAR = 'value1',
@@ -25,7 +25,8 @@ export type TwoInputsPropType = TwoInputsValuesType & {
 export type TwoValuesContainerStateType = TwoInputsValuesType
 
 export type TwoValuesContainerPropType = {
-    twoBarsContainerOutput: TwoBarsContainerOutputType,
+    colorClass: ColorCssClassEnum,
+    clickHandler: MouseEventHandler<HTMLDivElement>,
 }
 
 export type onChangeFnType = (leftInput: string, rightInput: string) => void
@@ -41,31 +42,25 @@ export type BarValuesType = {
 // implementation
 
 export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> = (props) => {
-    const {twoBarsContainerOutput} = props
     const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>({
         leftInput: '10',
         rightInput: '20'
     })
 
-    const twoBarsProps: TwoBarsContainerOutputType = {
-        ...twoBarsContainerOutput
-    }
-
     const leftBarProps: BarPropType = {
-        ...twoBarsContainerOutput,
+        ...props,
         cssClass: BAR_CSS_CLASS.LEFT_BAR,
         width: getAsNumber(parse(inputValues.leftInput))
     }
 
     const rightBarProps: BarPropType = {
-        ...twoBarsProps,
+        ...props,
         cssClass: BAR_CSS_CLASS.RIGHT_BAR,
         width: getAsNumber(parse(inputValues.rightInput))
     }
 
     const twoInputValuesProps: TwoInputsValuesType = {
-        leftInput: inputValues.leftInput,
-        rightInput: inputValues.rightInput,
+        ...inputValues
     }
 
     const twoInputProps: TwoInputsPropType = {
@@ -79,7 +74,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
     }
 
     const headerValuesProps: HeaderValuesPropsType = {
-        colorClass: twoBarsContainerOutput.colorClass,
+        ...props,
         leftValue: parse(inputValues.leftInput),
         rightValue: parse(inputValues.rightInput),
         result: sumUpInputValues(twoInputValuesProps)
@@ -90,7 +85,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
             <HeaderValues {...headerValuesProps}/>
             <div className="main">
                 <div className="left-panel">
-                    <TwoBars {...twoBarsProps}
+                    <TwoBars {...props}
                              leftBar={<Bar {...leftBarProps}/>}
                              rightBar={<Bar {...rightBarProps}/>}
                     />

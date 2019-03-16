@@ -1,6 +1,10 @@
 import * as React from 'react'
 import {FunctionComponent, MouseEventHandler, useState} from 'react'
-import {TwoValuesContainer} from 'app/containers/two-inputs/two-values-container';
+import {TwoValuesContainer, TwoValuesContainerPropType} from 'app/containers/two-inputs/two-values-container';
+import {
+    ColorSchemeIndicator,
+    ColorSchemeIndicatorPropType
+} from 'app/components/color-scheme-indicator/color-scheme-indicator';
 
 export const enum ColorCssClassEnum {
     regularColor = 'regularColor',
@@ -11,16 +15,13 @@ export type TwoBarsPropValuesType = {
     colorClass: ColorCssClassEnum
 }
 
-export type TwoBarsContainerOutputType = TwoBarsPropValuesType & {
-    clickHandler: MouseEventHandler<HTMLDivElement>
-}
 
 export type TwoBarsContainerType = FunctionComponent<{}>
 
 
 export const TwoBarsContainer: TwoBarsContainerType = (props) => {
     const [colorClass, setColorClass] = useState(ColorCssClassEnum.regularColor)
-    const twoBarsProp: TwoBarsContainerOutputType = {
+    const twoValuesContainerProps: TwoValuesContainerPropType = {
         colorClass: colorClass,
         clickHandler: (event) => {
             if (colorClass === ColorCssClassEnum.regularColor) {
@@ -31,7 +32,14 @@ export const TwoBarsContainer: TwoBarsContainerType = (props) => {
         }
     }
 
+    const colorSchemeIndicatorProps: ColorSchemeIndicatorPropType = {
+        colorClass: colorClass
+    }
+
     return (
-        <TwoValuesContainer twoBarsContainerOutput={twoBarsProp}/>
+        <div>
+            <TwoValuesContainer {...twoValuesContainerProps}/>
+            <ColorSchemeIndicator {...colorSchemeIndicatorProps}/>
+        </div>
     )
 }
