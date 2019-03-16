@@ -12,7 +12,6 @@ export type BarType = FunctionComponent<BarPropType>
 export type BarPropType = BarValuesType
 export type BarClickHandlerType = MouseEventHandler<HTMLDivElement>
 
-
 export const Bar: BarType = (props) => {
 
     const width = props.width

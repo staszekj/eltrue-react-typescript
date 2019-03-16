@@ -6,22 +6,29 @@ import {
     onChangeFnType,
     TwoValuesContainer
 } from 'app/containers/two-inputs/two-values-container';
-import {parse, getAsNumber, sumUpInputValues} from 'app/containers/two-inputs/two-values-parser';
+import {
+    parse,
+    getAsNumber,
+    slowlySumUpInputValues,
+    sumUpInputValues
+} from 'app/containers/two-inputs/two-values-parser';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {ColorCssClassEnum} from 'app/containers/two-bars/two-bars-container';
 import {TwoBars} from 'app/components/two-bars/two-bars';
-import {HeaderValues} from '../../../app/components/header-values/header-values';
+import {HeaderValues} from 'app/components/header-values/header-values';
 
 jest.mock('app/containers/two-inputs/two-values-parser')
 
 const parseMock = parse as jest.Mock
 const getAsNumberMock = getAsNumber as jest.Mock
 const sumUpInputValuesMock = sumUpInputValues as jest.Mock
+const slowlySumUpInputValuesMock = slowlySumUpInputValues as jest.Mock
 
 describe('<TwoValuesContainer />', () => {
 
     let twoValuesContainerEl: ReactTestInstance;
     const twoBarsFactoryFnMock = jest.fn() as jest.Mock
+    const resultCalculationMock = jest.fn() as jest.Mock
 
     beforeEach(() => {
         parseMock.mockReset()
@@ -30,6 +37,15 @@ describe('<TwoValuesContainer />', () => {
         getAsNumberMock.mockImplementation(value => value)
         sumUpInputValuesMock.mockReset()
         sumUpInputValuesMock.mockImplementation(inputValues => parseMock(inputValues.leftInput) + parseMock(inputValues.rightInput))
+        resultCalculationMock.mockImplementation(inputValues => {
+            return {
+                then: (callback: Function) => {
+                    callback(parseMock(inputValues.leftInput) + parseMock(inputValues.rightInput))
+                }
+            }
+        })
+        slowlySumUpInputValuesMock.mockReset()
+        slowlySumUpInputValuesMock.mockReturnValue(resultCalculationMock)
 
         twoValuesContainerEl = TestRenderer.create(<TwoValuesContainer colorClass={ColorCssClassEnum.bwColor}
                                                                        clickHandler={twoBarsFactoryFnMock}/>).root
@@ -39,9 +55,9 @@ describe('<TwoValuesContainer />', () => {
         const headerValuesEl = twoValuesContainerEl.findByType(HeaderValues)
 
         expect(headerValuesEl.props['colorClass']).toEqual(ColorCssClassEnum.bwColor)
-        expect(headerValuesEl.props['leftValue']).toEqual(10)
-        expect(headerValuesEl.props['rightValue']).toEqual(20)
-        expect(headerValuesEl.props['result']).toEqual(30)
+        expect(headerValuesEl.props['leftValue']).toEqual(50)
+        expect(headerValuesEl.props['rightValue']).toEqual(80)
+        expect(headerValuesEl.props['result']).toEqual(130)
     })
 
 

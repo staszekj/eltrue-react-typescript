@@ -1,7 +1,11 @@
 import * as React from 'react'
 import {FunctionComponent, MouseEventHandler, useState} from 'react'
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
-import {getAsNumber, parse, sumUpInputValues} from 'app/containers/two-inputs/two-values-parser';
+import {
+    getAsNumber,
+    parse,
+    slowlySumUpInputValues, sumUpInputValues
+} from 'app/containers/two-inputs/two-values-parser';
 import {TwoBars} from 'app/components/two-bars/two-bars';
 import {Bar, BarPropType} from 'app/components/two-bars/bar';
 import {HeaderValues, HeaderValuesPropsType} from '../../components/header-values/header-values';
@@ -42,10 +46,14 @@ export type BarValuesType = {
 // implementation
 
 export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> = (props) => {
-    const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>({
-        leftInput: '10',
-        rightInput: '20'
-    })
+    const initState: TwoInputsValuesType = {
+        leftInput: '50',
+        rightInput: '80'
+    }
+    const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
+    const [result, setResult] = useState<number | null>(sumUpInputValues(initState))
+
+    const slowlyResultCalculation = slowlySumUpInputValues(2000)
 
     const leftBarProps: BarPropType = {
         ...props,
@@ -65,11 +73,16 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
 
     const twoInputProps: TwoInputsPropType = {
         ...twoInputValuesProps,
+
         onChange: (leftInput, rightInput) => {
-            setInputValues({
+            const inputValues: TwoInputsValuesType = {
                 leftInput,
                 rightInput
-            })
+            }
+            setInputValues(inputValues)
+            setResult(null)
+            slowlyResultCalculation(inputValues)
+                .then(setResult)
         }
     }
 
@@ -77,7 +90,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
         ...props,
         leftValue: parse(inputValues.leftInput),
         rightValue: parse(inputValues.rightInput),
-        result: sumUpInputValues(twoInputValuesProps)
+        result: result
     }
 
     return (
