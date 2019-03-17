@@ -4,8 +4,8 @@ import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {
     getAsNumber,
     parse,
-    slowlySumUpInputValues, sumUpInputValues
-} from 'app/containers/two-inputs/two-values-parser';
+    slowdown, sumUpInputValues
+} from 'app/containers/two-inputs/two-values-calculator';
 import {TwoBars} from 'app/components/two-bars/two-bars';
 import {Bar, BarPropType} from 'app/components/two-bars/bar';
 import {HeaderValues, HeaderValuesPropsType} from '../../components/header-values/header-values';
@@ -53,7 +53,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
     const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
     const [result, setResult] = useState<number | null>(sumUpInputValues(initState))
 
-    const slowlyResultCalculation = slowlySumUpInputValues(2000)
+    const slowdownWithDelay = slowdown(2000)
 
     const leftBarProps: BarPropType = {
         ...props,
@@ -81,7 +81,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
             }
             setInputValues(inputValues)
             setResult(null)
-            slowlyResultCalculation(inputValues)
+            slowdownWithDelay(sumUpInputValues(inputValues))
                 .then(setResult)
         }
     }

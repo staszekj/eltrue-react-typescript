@@ -9,7 +9,7 @@ describe('color scheme indicator', () => {
             colorClass={ColorCssClassEnum.regularColor}/>).root
         const span = colorSchemeIndicatorEl.findByType('span')
 
-        expect(span.props['className']).toEqual('indicator regular-indicator')
+        expect(span.props['className']).toEqual('indicator regularColor')
     })
 
     it('should display indicators for black and white', () => {
@@ -17,6 +17,6 @@ describe('color scheme indicator', () => {
             colorClass={ColorCssClassEnum.bwColor}/>).root
         const span = colorSchemeIndicatorEl.findByType('span')
 
-        expect(span.props['className']).toEqual('indicator black-white-indicator')
+        expect(span.props['className']).toEqual('indicator bwColor')
     })
 })

@@ -9,8 +9,8 @@ export type ColorSchemeIndicatorPropType = {
 export const ColorSchemeIndicator: FunctionComponent<ColorSchemeIndicatorPropType> = (props) => {
     const {colorClass} = props
     const elements = new Map<ColorCssClassEnum, ReactComponentElement<'span'>>();
-    elements.set(ColorCssClassEnum.bwColor, <span className="indicator black-white-indicator">Black and white</span>)
-    elements.set(ColorCssClassEnum.regularColor, <span className="indicator regular-indicator">Regular schema</span>)
+    elements.set(ColorCssClassEnum.bwColor, <span className="indicator bwColor">Dark</span>)
+    elements.set(ColorCssClassEnum.regularColor, <span className="indicator regularColor">Regular</span>)
 
     return (
         <div className="color-scheme-indicator">

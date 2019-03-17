@@ -1,10 +1,10 @@
 import {
     getAsNumber,
     parse,
-    slowlySumUpInputValues,
+    slowdown,
     sumUpInputValues,
     validate
-} from 'app/containers/two-inputs/two-values-parser';
+} from 'app/containers/two-inputs/two-values-calculator';
 import {TwoInputsValuesType} from '../../../app/containers/two-inputs/two-values-container';
 
 describe('TwoValuesParser', () => {
@@ -84,9 +84,8 @@ describe('TwoValuesParser', () => {
     })
 
     it('should slowly sum up values', async () => {
-        const resultCalculation = slowlySumUpInputValues(1)
-        const inputValues = getInputValues()
-        const result = await resultCalculation(inputValues)
+        const slowdownWithDelay = slowdown(1)
+        const result = await slowdownWithDelay(30)
 
         expect(result).toEqual(30)
     })

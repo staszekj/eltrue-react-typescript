@@ -9,20 +9,20 @@ import {
 import {
     parse,
     getAsNumber,
-    slowlySumUpInputValues,
+    slowdown,
     sumUpInputValues
-} from 'app/containers/two-inputs/two-values-parser';
+} from 'app/containers/two-inputs/two-values-calculator';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {ColorCssClassEnum} from 'app/containers/two-bars/two-bars-container';
 import {TwoBars} from 'app/components/two-bars/two-bars';
 import {HeaderValues} from 'app/components/header-values/header-values';
 
-jest.mock('app/containers/two-inputs/two-values-parser')
+jest.mock('app/containers/two-inputs/two-values-calculator')
 
 const parseMock = parse as jest.Mock
 const getAsNumberMock = getAsNumber as jest.Mock
 const sumUpInputValuesMock = sumUpInputValues as jest.Mock
-const slowlySumUpInputValuesMock = slowlySumUpInputValues as jest.Mock
+const slowlySumUpInputValuesMock = slowdown as jest.Mock
 
 describe('<TwoValuesContainer />', () => {
 
@@ -37,10 +37,10 @@ describe('<TwoValuesContainer />', () => {
         getAsNumberMock.mockImplementation(value => value)
         sumUpInputValuesMock.mockReset()
         sumUpInputValuesMock.mockImplementation(inputValues => parseMock(inputValues.leftInput) + parseMock(inputValues.rightInput))
-        resultCalculationMock.mockImplementation(inputValues => {
+        resultCalculationMock.mockImplementation(value => {
             return {
                 then: (callback: Function) => {
-                    callback(parseMock(inputValues.leftInput) + parseMock(inputValues.rightInput))
+                    callback(value)
                 }
             }
         })

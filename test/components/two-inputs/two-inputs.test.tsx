@@ -4,9 +4,9 @@ import {ReactTestInstance, ReactTestRenderer} from 'react-test-renderer';
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {expand} from 'rxjs/operators';
 import {ChangeEvent} from 'react';
-import {validate} from 'app/containers/two-inputs/two-values-parser';
+import {validate} from 'app/containers/two-inputs/two-values-calculator';
 
-jest.mock('app/containers/two-inputs/two-values-parser')
+jest.mock('app/containers/two-inputs/two-values-calculator')
 
 const validateMock = validate as jest.Mock
 

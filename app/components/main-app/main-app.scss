@@ -27,6 +27,16 @@
       color: lightgreen;
     }
 
+    .bwColor {
+      .header-value-1 {
+        color: gray;
+      }
+
+      .header-value-2 {
+        color: lightsteelblue;
+      }
+    }
+
     .header-value-result {
       color: black;
     }
@@ -66,23 +76,13 @@
       background-color: lightgreen;
     }
 
-    .regular-color {
-      .value1 {
-        background-color: deeppink;
-      }
-
-      .value2 {
-        background-color: lightgreen;
-      }
-    }
-
-    .bw-color {
+    .bwColor {
       .value1 {
         background-color: gray;
       }
 
       .value2 {
-        background-color: white;
+        background-color: lightsteelblue;
       }
     }
 
@@ -99,22 +99,20 @@
 
     input {
       font-size: 1em;
-      border: solid 2px;
-      border-radius: 10px;
       width: 6em;
       padding: 0 5px;
     }
+
     .input1 {
       float: left;
-      border-color: deeppink;
     }
+
     .input2 {
       float: right;
-      border-color: lightgreen;
     }
 
     input.error {
-      background-color: red;
+      background-color: pink;
     }
 
     .background-color-green {
@@ -127,6 +125,11 @@
 
     .indicator {
       font-weight: bold;
+      color: deeppink;
+    }
+
+    .bwColor {
+      color: lightsteelblue;
     }
   }
 }

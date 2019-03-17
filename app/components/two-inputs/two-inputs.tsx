@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ChangeEvent, FunctionComponent} from 'react';
 import {TwoInputsPropType} from 'app/containers/two-inputs/two-values-container';
-import {validate} from 'app/containers/two-inputs/two-values-parser';
+import {validate} from 'app/containers/two-inputs/two-values-calculator';
 
 export type TwoInputsType = FunctionComponent<TwoInputsPropType>
 

@@ -13,14 +13,9 @@ export function sumUpInputValues(inputValues: TwoInputsValuesType): number | nul
     return leftInputParsed === null || rightInputParsed === null ? null : leftInputParsed + rightInputParsed
 }
 
-export const slowlySumUpInputValues = (delay: number) => (inputValues: TwoInputsValuesType) => {
+export const slowdown = (delay: number) => (value: number | null) => {
     return new Promise<number | null>((resolve) => {
-        function doCalculation() {
-            const result: number | null = sumUpInputValues(inputValues)
-            resolve(result)
-        }
-
-        setTimeout(doCalculation, delay)
+        setTimeout(() => resolve(value), delay)
     })
 }
 
