@@ -1,7 +1,9 @@
 import React from 'react'
+import {isNullOrUndefined} from 'util';
 
 describe('structural types tests', () => {
     it('should call b method', () => {
+
         type NarrowType = {
             a: number,
             b: () => void
@@ -25,7 +27,7 @@ describe('structural types tests', () => {
             b: () => {
                 console.log('Im wideType')
             },
-            c: 'TypeScript'
+            'c': 'TypeScript'
         }
 
         narrowObj = wideObj
@@ -68,5 +70,22 @@ describe('structural types tests', () => {
         // function fun(obj: WideType){
         //     obj.b()
         // }
+    })
+
+    it('should union', () => {
+        // type NarrowType = {
+        //     a: number,
+        //     b: () => void
+        // }
+        //
+        // type WideType = {
+        //     a: number,
+        //     b: () => void,
+        //     c: string
+        // }
+
+        type Keys = string
+
+        let key: Keys = 'HELLO';
     })
 });
