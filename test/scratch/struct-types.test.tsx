@@ -71,21 +71,4 @@ describe('structural types tests', () => {
         //     obj.b()
         // }
     })
-
-    it('should union', () => {
-        // type NarrowType = {
-        //     a: number,
-        //     b: () => void
-        // }
-        //
-        // type WideType = {
-        //     a: number,
-        //     b: () => void,
-        //     c: string
-        // }
-
-        type Keys = string
-
-        let key: Keys = 'HELLO';
-    })
 });
