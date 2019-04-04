@@ -1,5 +1,4 @@
 import React from 'react'
-import {isNullOrUndefined} from 'util';
 
 describe('structural types tests', () => {
     it('should call b method', () => {

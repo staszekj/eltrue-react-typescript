@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as lod from 'lodash/index';
+import * as lod from 'lodash';
 
 describe('basic types tests', () => {
 
