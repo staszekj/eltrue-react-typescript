@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as lod from 'lodash';
+import * as lod from 'lodash/index';
 
 describe('basic types tests', () => {
 
@@ -88,6 +88,6 @@ describe('basic types tests', () => {
 
         const result: string = lod.trim(' AAAA ')
 
-        expect(result).toEqual('AAAA`')
+        expect(result).toEqual('AAAA')
     })
 });
