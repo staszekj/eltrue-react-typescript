@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as lod from 'lodash';
 import {number} from 'prop-types';
 
-describe('basic types tests', () => {
+describe('basic types', () => {
 
     it('should assign value', () => {
         let a: number = 12
