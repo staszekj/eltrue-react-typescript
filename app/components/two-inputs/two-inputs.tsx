@@ -3,9 +3,7 @@ import {ChangeEvent, FunctionComponent} from 'react';
 import {TwoInputsPropType} from 'app/containers/two-inputs/two-values-container';
 import {validate} from 'app/containers/two-inputs/two-values-calculator';
 
-export type TwoInputsType = FunctionComponent<TwoInputsPropType>
-
-export const TwoInputs: TwoInputsType = (props) => {
+export const TwoInputs: FunctionComponent<TwoInputsPropType> = (props) => {
 
     const leftInputOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.onChange(e.target.value, props.rightInput)
