@@ -1,7 +1,7 @@
 {
   "name": "eltrue-react-typescript",
   "version": "0.0.1",
-  "description": "ELTrue Redux with flow",
+  "description": "ELTrue React and TypeScript",
   "main": "''",
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
@@ -40,6 +40,7 @@
     "@types/lodash": "^4.14.123",
     "@types/react": "^16.8.12",
     "@types/react-dom": "^16.8.3",
+    "@types/react-redux": "^7.0.8",
     "@types/react-router-dom": "^4.3.1",
     "@types/react-test-renderer": "^16.8.1",
     "acorn": "^6.1.1",
@@ -61,7 +62,10 @@
     "normalize.css": "^8.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^2.1.5",
+    "react-redux": "^7.0.2",
     "react-test-renderer": "^16.8.6",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.0.1",
     "sass-resources-loader": "^1.3.3",
     "style-loader": "^0.21.0",
