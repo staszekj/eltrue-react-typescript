@@ -13,7 +13,7 @@ module.exports = {
     mode: 'development',
     devtool: "inline-source-map",
     entry: {
-        'app': ['./app/app.js']
+        'app': ['./app/app.tsx']
     },
     output: {
         path: path.join(__dirname, 'public'),
