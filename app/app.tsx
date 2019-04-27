@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import thunk from 'redux-thunk';
 import MainApp from "app/components/main-app";
 import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
-import {twoBarsReducer} from './redux/two-bars';
+import {twoBarsReducer} from 'app/redux/two-bars/two-bars';
 import {Provider} from 'react-redux';
 
 
