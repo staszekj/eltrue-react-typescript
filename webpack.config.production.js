@@ -4,7 +4,7 @@ const path = require('path');
 const rules = require('./webpack.loaders.production');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -31,7 +31,7 @@ module.exports = {
             }
         },
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true,
                 sourceMap: true
