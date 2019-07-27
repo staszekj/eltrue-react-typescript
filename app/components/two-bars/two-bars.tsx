@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {BarType} from './bar';
-import {ReactComponentElement} from 'react';
+import {ReactElement} from 'react';
 import {FunctionComponent} from 'react';
 import {TwoBarsPropValuesType} from 'app/containers/two-bars/two-bars-container';
 
 export type TwoBarsPropType = TwoBarsPropValuesType & {
-    leftBar: ReactComponentElement<BarType>,
-    rightBar: ReactComponentElement<BarType>
+    leftBar: ReactElement<BarType>,
+    rightBar: ReactElement<BarType>
 }
 
 export const TwoBars: FunctionComponent<TwoBarsPropType> = (props) => {
