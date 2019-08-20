@@ -20,8 +20,10 @@ export const TwoInputs: FunctionComponent<TwoInputsPropType> = (props) => {
 
     return (
         <div>
-            <input className={leftCss} value={props.leftInput} onChange={leftInputOnChangeHandler}/>
-            <input className={rightCss} value={props.rightInput} onChange={rightInputOnChangeHandler}/>
+            <input className={leftCss} value={props.leftInput} onChange={leftInputOnChangeHandler}
+                   onClick={props.onLeftInputClick}/>
+            <input className={rightCss} value={props.rightInput} onChange={rightInputOnChangeHandler}
+                   onClick={props.onRightInputClick}/>
         </div>
     )
 }

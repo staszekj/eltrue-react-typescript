@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {FunctionComponent, MouseEventHandler, useState} from 'react'
+import {FunctionComponent, MouseEventHandler, useContext, useState} from 'react'
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {
     getAsNumber,
@@ -11,6 +11,7 @@ import {Bar, BarPropType} from 'app/components/two-bars/bar';
 import {HeaderValues, HeaderValuesPropsType} from '../../components/header-values/header-values';
 import {ColorCssClassEnum} from '../two-bars/two-bars-container';
 import {useTwoInputs, initState} from './useTwoInputs'
+import {TwoInputsCtx} from "app/contexts/two-inputs-ctx"
 
 export const enum BAR_CSS_CLASS {
     LEFT_BAR = 'value1',
@@ -28,6 +29,8 @@ export type TwoInputsPropType = {
     leftInput: string,
     rightInput: string,
     onChange: onChangeFnType,
+    onLeftInputClick: MouseEventHandler<HTMLInputElement>
+    onRightInputClick: MouseEventHandler<HTMLInputElement>
 }
 export type TwoValuesContainerStateType = TwoInputsValuesType
 
@@ -51,6 +54,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
     // const {inputValues, result, setTwoInputValues} = useTwoInputs();
     const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
     const [result, setResult] = useState<number | null>(sumUpInputValues(initState))
+    const twoInputsCtx = useContext(TwoInputsCtx);
 
     const leftBarProps: BarPropType = {
         ...props,
@@ -81,6 +85,14 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
             setResult(null)
             slowdown(2000)(sumUpInputValues(inputValues))
                 .then(setResult)
+        },
+
+        onLeftInputClick: () => {
+            twoInputsCtx && twoInputsCtx.handleLeftClick();
+        },
+
+        onRightInputClick: () => {
+            twoInputsCtx && twoInputsCtx.handleRightClick();
         }
     }
 

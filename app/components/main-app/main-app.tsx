@@ -2,6 +2,7 @@ import * as React from 'react'
 import {TwoBarsContainer} from '../../containers/two-bars/two-bars-container';
 import {ReactElement} from 'react';
 import {JSXElementConstructor} from 'react';
+import {TwoInputsProvider} from "../../contexts/two-inputs-ctx"
 
 import './main-app.scss'
 
@@ -10,9 +11,11 @@ export type MainAppType = ({}) => ReactElement<{}, JSXElementConstructor<HTMLDiv
 export const MainApp: MainAppType = ({}) => {
 
     return (
-        <div className="main-app">
-            <TwoBarsContainer/>
-        </div>
+        <TwoInputsProvider>
+            <div className="main-app">
+                <TwoBarsContainer/>
+            </div>
+        </TwoInputsProvider>
     )
 }
 
