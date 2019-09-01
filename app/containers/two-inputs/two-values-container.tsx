@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {FunctionComponent, MouseEventHandler, useState} from 'react'
+import {FunctionComponent, RefForwardingComponent, MouseEventHandler, useState, forwardRef} from 'react'
 import {TwoInputs} from 'app/components/two-inputs/two-inputs';
 import {
     getAsNumber,
@@ -47,7 +47,7 @@ export type BarValuesType = {
 }
 
 // implementation
-export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> = (props) => {
+const _TwoValuesContainer: RefForwardingComponent<HTMLDivElement, TwoValuesContainerPropType> = (props, ref) => {
     // const {inputValues, result, setTwoInputValues} = useTwoInputs();
     const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
     const [result, setResult] = useState<number | null>(sumUpInputValues(initState))
@@ -92,7 +92,7 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
     }
 
     return (
-        <div>
+        <div ref={ref}>
             <HeaderValues {...headerValuesProps}/>
             <div className="main">
                 <div className="left-panel">
@@ -108,3 +108,5 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
         </div>
     )
 }
+
+export const TwoValuesContainer = forwardRef(_TwoValuesContainer);
