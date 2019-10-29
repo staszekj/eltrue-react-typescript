@@ -31,4 +31,20 @@ describe('extra tests', () => {
             c: 2
         }
     })
+
+    it("use utils", () => {
+        /* https://www.typescriptlang.org/docs/handbook/utility-types.html#omittk */
+
+        type Abc = {
+            a: string,
+            b: boolean,
+            c: number
+        }
+
+        const x: Pick<Abc, "b" | "c"> = {
+            b: true,
+            c: 10
+        };
+
+    });
 });
