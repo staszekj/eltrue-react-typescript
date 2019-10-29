@@ -4,20 +4,48 @@ import {number} from 'prop-types';
 
 describe('basic types', () => {
 
+  it("should show difference between dynamic and static types", () => {
+
+    let x: number = 0;
+    let y: number = 0;
+
+    const z = x / y;
+    const arr = new Array<number>(10);
+    arr[11] = 0;
+
+    const bigNumber: number = 2 * Number.MAX_VALUE;
+
+  });
+
+
     it('should assign value', () => {
         let a: number = 12
         a = 0
 
         let b: number | undefined | null
         b = 1
+
+      const funfun = (x: number): number | null => {
+        return x > 0 ? x : null;
+      };
+
+      const restult = funfun(10);
+      const result2 = restult && restult + 1;
+
+      if (typeof restult === "number") {
+        const result2 = restult + 1;
+      }
     })
 
     it('should assign values to vector', () => {
-        let vector: {
+
+      type TVector = {
             x: number,
             y: number,
             z?: number
-        } = {
+      }
+
+      let vector: TVector = {
             x: 1,
             y: 2
         }
@@ -88,8 +116,15 @@ describe('basic types', () => {
         console.log('Val1: ', xyb.b)
 
         function fun(xyb: XY | XB): void {
-            console.log('Val2:', xyb.x)
+          if (isXB(xyb)) {
+            console.log("Val2:", xyb.b);
+          }
         }
+
+      //type guard function
+      function isXB (xyb: XY | XB): xyb is XB {
+        return (xyb as XB).b !== undefined;
+      }
 
         fun(xyb)
     })
