@@ -10,6 +10,7 @@ import {TwoBars} from 'app/components/two-bars/two-bars';
 import {Bar, BarPropType} from 'app/components/two-bars/bar';
 import {HeaderValues, HeaderValuesPropsType} from '../../components/header-values/header-values';
 import {ColorCssClassEnum} from '../two-bars/two-bars-container';
+import {useTwoInputs, initState} from './useTwoInputs'
 
 export const enum BAR_CSS_CLASS {
     LEFT_BAR = 'value1',
@@ -23,7 +24,9 @@ export type TwoInputsValuesType = {
     rightInput: string,
 }
 
-export type TwoInputsPropType = TwoInputsValuesType & {
+export type TwoInputsPropType = {
+    leftInput: string,
+    rightInput: string,
     onChange: onChangeFnType,
 }
 export type TwoValuesContainerStateType = TwoInputsValuesType
@@ -44,16 +47,10 @@ export type BarValuesType = {
 }
 
 // implementation
-
 export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> = (props) => {
-    const initState: TwoInputsValuesType = {
-        leftInput: '50',
-        rightInput: '80'
-    }
+    // const {inputValues, result, setTwoInputValues} = useTwoInputs();
     const [inputValues, setInputValues] = useState<TwoValuesContainerStateType>(initState)
     const [result, setResult] = useState<number | null>(sumUpInputValues(initState))
-
-    const slowdownWithDelay = slowdown(2000)
 
     const leftBarProps: BarPropType = {
         ...props,
@@ -79,9 +76,10 @@ export const TwoValuesContainer: FunctionComponent<TwoValuesContainerPropType> =
                 leftInput,
                 rightInput
             }
+            // setTwoInputValues(inputValues)
             setInputValues(inputValues)
             setResult(null)
-            slowdownWithDelay(sumUpInputValues(inputValues))
+            slowdown(2000)(sumUpInputValues(inputValues))
                 .then(setResult)
         }
     }
